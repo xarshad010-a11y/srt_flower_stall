@@ -1,0 +1,37 @@
+{% extends 'srt_flower_marchent/base.html' %}
+{% load static %}
+
+{% block title %}Flowers - SRT Flower Stall{% endblock %}
+
+{% block content %}
+    <h2>Available Flowers</h2>
+    <table style="width:100%; border-collapse: collapse;">
+        <thead>
+            <tr>
+                <th style="text-align:left; padding:8px;">Name</th>
+                <th style="text-align:left; padding:8px;">Price</th>
+                <th style="text-align:left; padding:8px;">Stock</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for flower in flowers %}
+            <tr>
+                <td style="padding:8px;">
+                    {% if flower.thumbnail %}
+                        <img src="{{ flower.thumbnail.url }}" alt="{{ flower.name }}" class="flower-thumb">
+                    {% elif flower.image %}
+                        <img src="{{ flower.image.url }}" alt="{{ flower.name }}" class="flower-thumb">
+                    {% else %}
+                        <img src="{% static 'images/placeholder.svg' %}" alt="placeholder" class="flower-thumb">
+                    {% endif %}
+                    <div>{{ flower.name }}</div>
+                </td>
+                <td style="padding:8px;">{{ flower.price }}</td>
+                <td style="padding:8px;">{{ flower.available_stock }}</td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="4">No flowers added yet.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'srt_flower_marchent/base.html' %}
+
+{% block title %}Edit Price - {{ flower.name }}{% endblock %}
+
+{% block content %}
+    <h2>Edit price for {{ flower.name }}</h2>
+    {% if flower.image %}
+        <p>Current image:</p>
+        <img src="{{ flower.image.url }}" alt="{{ flower.name }}" class="flower-thumb">
+    {% endif %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div style="max-width:360px;">
+            {{ form.as_p }}
+            <button type="submit" class="flower-btn">Save</button>
+            <a href="{% url 'flowers_list' %}" style="margin-left:12px;">Cancel</a>
+        </div>
+    </form>
+{% endblock %}

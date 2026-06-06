@@ -1,0 +1,20 @@
+﻿# Python cache
+__pycache__/
+*.py[cod]
+*.class
+
+# Virtualenvs
+venv/
+env/
+.venv/
+
+# Django
+*.sqlite3
+media/
+media/*
+srt_flower_stall/staticfiles/
+
+# Editors / OS
+.vscode/
+*.swp
+.DS_Store

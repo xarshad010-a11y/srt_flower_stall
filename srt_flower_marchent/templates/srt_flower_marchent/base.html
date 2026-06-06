@@ -1,0 +1,102 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}SRT Flower Stall{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/flower.css' %}?v=3">
+        <style>
+            /* Temporary high-priority rules to ensure readability over background */
+            header, .page, main, footer, .card { position: relative !important; z-index: 9999 !important; }
+            .card { background: rgba(0,0,0,0.92) !important; color: #ffffff !important; border: 1px solid rgba(255,255,255,0.06) !important; }
+            .flower-btn { background: #ffd87e !important; color: #081018 !important; border-color: rgba(0,0,0,0.15) !important; }
+            h1,h2,p,li,nav a, a { color: #ffffff !important; text-shadow: 0 2px 8px rgba(0,0,0,0.8) !important; }
+        </style>
+</head>
+<body>
+    <div class="video-bg-wrap">
+        <video class="bg-video" autoplay muted loop playsinline>
+            <source src="{% static 'videos/background.mp4' %}" type="video/mp4">
+            <!-- Fallback: if you don't have a local video, replace the src above with a hosted URL -->
+        </video>
+        <div class="video-overlay"></div>
+    </div>
+    <!-- Photo background: place your image at static/images/bg_full.jpg -->
+    <div class="photo-bg" style="background-image: url('{% static 'images/bg_full.jpg' %}?v=3');" aria-hidden="true"></div>
+    <!-- SVG animated fallback / enhancement: two married couples with garlands -->
+    <div class="svg-bg-wrap" aria-hidden="true">
+        <svg class="svg-bg" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="garlandGrad" x1="0%" x2="100%">
+                    <stop offset="0%" stop-color="#ffd87e"/>
+                    <stop offset="100%" stop-color="#ffb3c1"/>
+                </linearGradient>
+            </defs>
+
+            <!-- Left couple: groom (dhoti) + bride (saree) -->
+            <g class="couple left" transform="translate(220,320)">
+                <g class="persons">
+                    <!-- groom head -->
+                    <circle class="head" cx="-48" cy="-88" r="26" fill="#dca68a"/>
+                    <!-- groom torso (dhoti + angavastram) -->
+                    <path d="M-80,-50 h60 v70 h-60 z" fill="#f8f4ea"/>
+                    <path d="M-80,-10 q40,30 80,0" fill="#e6c86a" opacity="0.9"/>
+
+                    <!-- bride head -->
+                    <circle class="head" cx="32" cy="-88" r="26" fill="#dca68a"/>
+                    <!-- bride torso (saree) -->
+                    <path d="M-10,-50 h90 v88 h-90 z" fill="#8b0000"/>
+                    <path d="M-10,10 q40,-30 80,0" fill="#d4a017" opacity="0.95"/>
+                </g>
+                <!-- garland between them -->
+                <path class="garland" d="M-10,-8 C-30,8 -60,38 -90,58" stroke="url(#garlandGrad)" stroke-width="12" fill="none" stroke-linecap="round"/>
+            </g>
+
+            <!-- Right couple: groom (dhoti) + bride (saree) realistic colors -->
+            <g class="couple right" transform="translate(920,320)">
+                <g class="persons">
+                    <!-- groom head -->
+                    <circle class="head" cx="-48" cy="-88" r="26" fill="#dca68a"/>
+                    <path d="M-80,-50 h60 v70 h-60 z" fill="#f8f4ea"/>
+                    <path d="M-80,-10 q40,30 80,0" fill="#c9a83f" opacity="0.95"/>
+
+                    <!-- bride head -->
+                    <circle class="head" cx="32" cy="-88" r="26" fill="#dca68a"/>
+                    <path d="M-10,-50 h90 v88 h-90 z" fill="#4b0b2e"/>
+                    <path d="M-10,10 q40,-30 80,0" fill="#e0b14b" opacity="0.95"/>
+                </g>
+                <path class="garland" d="M10,-8 C30,8 60,38 90,58" stroke="url(#garlandGrad)" stroke-width="12" fill="none" stroke-linecap="round"/>
+            </g>
+
+            <!-- Center subtle floral pattern -->
+            <g class="center-flowers" transform="translate(600,200)">
+                <circle cx="0" cy="0" r="40" fill="#ffe6ef" opacity="0.8"/>
+                <circle cx="-60" cy="30" r="18" fill="#ffd87e" opacity="0.9"/>
+                <circle cx="60" cy="30" r="18" fill="#d6b3e0" opacity="0.9"/>
+            </g>
+        </svg>
+    </div>
+    <header>
+        <div class="flower-garland">
+            <img src="{% static 'images/garland.svg' %}" alt="garland" class="garland-img">
+        </div>
+        <div class="page header-inner">
+            <h1>SRT Flower Stall</h1>
+            <nav>
+                <a href="/">Home</a>
+                <a href="/contact/">Contact</a>
+                <a href="{% url 'flowers_list' %}">Flowers</a>
+            </nav>
+        </div>
+    </header>
+    <main class="page">
+        <div class="card">
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+    <footer class="page">
+        <p>Fresh flowers, delivered with care.</p>
+    </footer>
+</body>
+</html>
