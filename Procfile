@@ -1,0 +1,1 @@
+web: gunicorn srt_flower_stall.wsgi:application --bind 0.0.0.0:$PORT
